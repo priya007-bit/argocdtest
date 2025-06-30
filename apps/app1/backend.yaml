@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: backend
+  namespace: argocd  # Make sure this matches where Argo CD is installed
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/priya007-bit/argocdtest.git
+    targetRevision: HEAD
+    path: webapps/backend
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nginxapp
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
