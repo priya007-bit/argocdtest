@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .Values.app.name }}
+  name: {{- range .Values.apps }}
   namespace: argocd  # Make sure this matches where Argo CD is installed
 spec:
   project: default
